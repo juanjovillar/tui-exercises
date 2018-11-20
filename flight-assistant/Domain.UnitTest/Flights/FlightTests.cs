@@ -4,7 +4,7 @@ using Domain.Flights;
 using GeoCoordinatePortable;
 using Xunit;
 
-namespace Domain.UnitTest
+namespace Domain.UnitTest.Flights
 {
     public class FlightTests
     {
@@ -57,7 +57,7 @@ namespace Domain.UnitTest
         public void RequiredFuel_Is_Properly_Calculated()
         {
             //Given
-            var expectedFuel = _aircraft.ConsumptionOnTakeOff + _aircraft.ConsumptionPerKm * _sut.Distance;
+            var expectedFuel = _aircraft.ConsumptionOnTakeOff + _aircraft.ConsumptionPerKm * _sut.Distance / 1000;
 
             //When
 
