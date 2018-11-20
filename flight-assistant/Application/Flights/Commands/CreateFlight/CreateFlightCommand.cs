@@ -10,7 +10,7 @@ namespace Application.Flights.Commands.CreateFlight
         private readonly IUnitOfWork _unitOfWork;
 
         public CreateFlightCommand(
-            IFlightRepositoryFacade repositories, 
+            IFlightRepositoryFacade repositories,
             IUnitOfWork unitOfWork)
         {
             _repositories = repositories;

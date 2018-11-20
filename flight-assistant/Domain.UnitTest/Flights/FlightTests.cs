@@ -1,7 +1,6 @@
 using Domain.Aircrafts;
 using Domain.Airports;
 using Domain.Flights;
-using GeoCoordinatePortable;
 using Xunit;
 
 namespace Domain.UnitTest.Flights
@@ -15,25 +14,29 @@ namespace Domain.UnitTest.Flights
 
         public FlightTests()
         {
+
             var departureAirport = new Airport
             {
                 IATA = "BIO",
                 City = "Bilbao",
-                GeoPosition = new GeoCoordinate(43.30110168457031, 2.9106099605560303)
+                Latitude = 43.30110168457031,
+                Longitude = 2.9106099605560303
             };
 
             var destinationAirport = new Airport
             {
                 IATA = "AGP",
                 City = "Malaga",
-                GeoPosition = new GeoCoordinate(36.67490005493164, 4.499110221862793)
+                Latitude = 36.67490005493164,
+                Longitude = 4.499110221862793
             };
 
             _newAirport = new Airport
             {
                 IATA = "JFK",
                 City = "New York",
-                GeoPosition = new GeoCoordinate(40.63980103, 73.77890015)
+                Latitude = 40.63980103,
+                Longitude = 73.77890015
             };
 
             _aircraft = new Aircraft
