@@ -3,7 +3,6 @@ using Application.Interfaces;
 using Domain.Aircrafts;
 using Domain.Airports;
 using Domain.Flights;
-using GeoCoordinatePortable;
 using Moq;
 using System.Collections.Generic;
 using System.Linq;
@@ -23,16 +22,20 @@ namespace Application.UnitTest.Flights.Queries
         {
             _departureAirpot = new Airport
             {
+                Id = 1,
                 IATA = "BIO",
                 City = "Bilbao",
-                GeoPosition = new GeoCoordinate(43.30110168457031, 2.9106099605560303)
+                Latitude = 43.30110168457031,
+                Longitude = 2.9106099605560303
             };
 
             _destinationAirport = new Airport
             {
+                Id = 2,
                 IATA = "AGP",
                 City = "Malaga",
-                GeoPosition = new GeoCoordinate(36.67490005493164, 4.499110221862793)
+                Latitude = 36.67490005493164,
+                Longitude = 4.499110221862793
             };
 
             _aircraft = new Aircraft
@@ -44,7 +47,7 @@ namespace Application.UnitTest.Flights.Queries
 
             var flightList = new List<Flight>
             {
-                new Flight(_departureAirpot, _destinationAirport, _aircraft)
+                new Flight(_departureAirpot,_destinationAirport, _aircraft)
             };
 
             _repository = new Mock<IFlightRepository>();
