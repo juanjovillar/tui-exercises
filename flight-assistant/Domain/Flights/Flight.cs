@@ -26,6 +26,6 @@ namespace Domain.Flights
 
         public double Distance => DepartureAirport.GeoPosition.GetDistanceTo(DestinationAirport.GeoPosition);
 
-        public double RequiredFuel => Aircraft.ConsumptionOnTakeOff + Aircraft.ConsumptionPerKm * Distance;
+        public double RequiredFuel => Aircraft.ConsumptionOnTakeOff + Aircraft.ConsumptionPerKm * Distance / 1000;
     }
 }
