@@ -1,8 +1,9 @@
-﻿using GeoCoordinatePortable;
+﻿using Domain.Common;
+using GeoCoordinatePortable;
 
 namespace Domain.Airports
 {
-    public class Airport
+    public class Airport : IEntity
     {
         public int Id { get; set; }
 

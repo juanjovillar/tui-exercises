@@ -1,6 +1,8 @@
-﻿namespace Domain.Aircrafts
+﻿using Domain.Common;
+
+namespace Domain.Aircrafts
 {
-    public class Aircraft
+    public class Aircraft : IEntity
     {
         public int Id { get; set; }
 
