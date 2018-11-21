@@ -1,10 +1,10 @@
 ﻿using System;
 
-namespace FileReader.Cryptography.Algorithms
+namespace FileReader.Cryptography.Decrypters
 {
-    public class ReverseDecryptor : IAlgorithm
+    public class ReverserDecrypter : IDecrypter
     {
-        public string Decrypt(string content)
+       public string Decrypt(string content)
         {
             var charArray = content.ToCharArray();
             Array.Reverse(charArray);

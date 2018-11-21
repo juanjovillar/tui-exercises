@@ -1,4 +1,6 @@
-﻿using System;
+﻿using FileReader;
+using FileReader.Security;
+using System;
 using System.Collections.Generic;
 
 namespace FileReaderApp
@@ -12,20 +14,38 @@ namespace FileReaderApp
                 @"Files\Text\TextFile.txt",
                 @"Files\Text\EncryptedTextFile.txt",
                 @"Files\XML\XMLFile.xml",
+                @"Files\XML\AdminXMLFile.xml",
+
             };
 
-            var fileReader = new FileReader.FileReader();
+            CreateFileReadRequest(systemFilePaths[0], false, Roles.User);
 
-            Console.WriteLine(fileReader.Read(systemFilePaths[0], false));
-            Console.WriteLine();
+            CreateFileReadRequest(systemFilePaths[1], false, Roles.User);
 
-            Console.WriteLine(fileReader.Read(systemFilePaths[1], true));
-            Console.WriteLine();
+            CreateFileReadRequest(systemFilePaths[1], true, Roles.User);
 
-            Console.WriteLine(fileReader.Read(systemFilePaths[2], false));
-            Console.WriteLine();
+            CreateFileReadRequest(systemFilePaths[2], false, Roles.User);
+
+            CreateFileReadRequest(systemFilePaths[3], false, Roles.User);            
+
+            CreateFileReadRequest(systemFilePaths[3], false, Roles.Admin);
 
             Console.ReadLine();
+        }
+
+        private static void CreateFileReadRequest(string filePath, bool decrypt, Roles role)
+        {
+            var request = new FileReadRequest(filePath, decrypt, role);
+            Console.WriteLine($"REQUEST -> File: {request.FilePath} | Decrypt: {request.ShouldDecrypt} | Role: {request.UserRole}");
+            ReadFile(request);
+            Console.WriteLine();
+        }
+
+        private static void ReadFile(FileReadRequest request)
+        {
+            var fileReader = new FileReaderFactory().CreateReader(request.FilePath);
+            var content = fileReader.Read(request);
+            Console.WriteLine(content);
         }
     }
 }
