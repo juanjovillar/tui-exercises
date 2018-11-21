@@ -1,39 +1,22 @@
-﻿using FileReader.Readers;
-using System.IO;
-using FileReader.Cryptography.Decrypters;
+﻿using FileReader.Cryptography.Decrypters;
+using FileReader.Readers;
+using FileReader.Security;
 
 namespace FileReader.FileReaders
 {
-    public class JsonFileReader : FileReader
+    public class JsonFileReader : AbstractFileReader
     {
-        private readonly IReader _reader;
-        private readonly IDecrypter _decrypter;
-
-        public JsonFileReader(IReader reader, IDecrypter decrypter)
+        public JsonFileReader(
+            IReader reader, 
+            IDecrypter decrypter, 
+            ISecurityContext securityContext)
+            : base(reader, decrypter, securityContext)
         {
-            _reader = reader;
-            _decrypter = decrypter;
         }
 
         public override bool CanManageType(string filetype)
         {
             return filetype == ".json";
-        }
-
-        public override string Read(FileReadRequest request)
-        {
-            var file = new FileInfo(request.FilePath);
-            var absoluteFilePath = GetAbsolutePath(file);
-
-            var content = _reader.Read(absoluteFilePath);
-
-            if (request.ShouldDecrypt)
-            {
-                var decrypter = _decrypter;
-                content = decrypter.Decrypt(content);
-            }
-
-            return content;
         }
     }
 }

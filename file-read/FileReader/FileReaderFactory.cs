@@ -11,13 +11,13 @@ namespace FileReader
 {
     public class FileReaderFactory
     {
-        private readonly IEnumerable<FileReader> _readers;
+        private readonly IEnumerable<AbstractFileReader> _readers;
 
         public FileReaderFactory()
         {
-            _readers = new List<FileReader>
+            _readers = new List<AbstractFileReader>
             {
-                new FileReaders.TextFileReader(
+                new TextFileReader(
                     new TextReader(), 
                     new ReverserDecrypter(),
                     new SecurityContext()),
@@ -29,11 +29,12 @@ namespace FileReader
 
                 new JsonFileReader(
                     new JsonReader(),
-                    new ReverserDecrypter())
+                    new ReverserDecrypter(),
+                    new SecurityContext())
             };
         }
 
-        public FileReader CreateReader(string filepath)
+        public AbstractFileReader CreateReader(string filepath)
         {
             var fileInfo = new FileInfo(filepath);
             return _readers.Single(r => r.CanManageType(fileInfo.Extension));

@@ -77,6 +77,7 @@ namespace FileReaderApp
             {
                 @"Files\JSON\JsonFile.json",
                 @"Files\JSON\EncryptedJsonFile.json",
+                @"Files\JSON\AdminJsonFile.json",
             };
 
             Console.WriteLine("Executing JSON file reads");
@@ -85,6 +86,8 @@ namespace FileReaderApp
             CreateFileReadRequest(jsonFilePaths[0], false, Roles.User);
             CreateFileReadRequest(jsonFilePaths[1], false, Roles.User);
             CreateFileReadRequest(jsonFilePaths[1], true, Roles.User);
+            CreateFileReadRequest(jsonFilePaths[2], false, Roles.User);
+            CreateFileReadRequest(jsonFilePaths[2], false, Roles.Admin);
         }
     }
 }
