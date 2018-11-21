@@ -19,7 +19,8 @@ namespace FileReader
             {
                 new FileReaders.TextFileReader(
                     new TextReader(), 
-                    new ReverserDecrypter()),
+                    new ReverserDecrypter(),
+                    new SecurityContext()),
 
                 new XMLFileReader(
                     new XMLReader(),

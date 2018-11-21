@@ -10,6 +10,9 @@
   </ItemGroup>
 
   <ItemGroup>
+    <None Update="Files\Text\AdminTextFile.txt">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
     <None Update="Files\Text\EncryptedTextFile.txt">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>

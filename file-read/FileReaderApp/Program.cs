@@ -16,6 +16,7 @@ namespace FileReaderApp
                 @"Files\XML\XMLFile.xml",
                 @"Files\XML\AdminXMLFile.xml",
                 @"Files\XML\EncryptedXMLFile.xml",
+                @"Files\Text\AdminTextFile.txt",
             };
 
             CreateFileReadRequest(systemFilePaths[0], false, Roles.User);
@@ -33,6 +34,10 @@ namespace FileReaderApp
             CreateFileReadRequest(systemFilePaths[4], false, Roles.User);
 
             CreateFileReadRequest(systemFilePaths[4], true, Roles.User);
+
+            CreateFileReadRequest(systemFilePaths[5], false, Roles.User);
+
+            CreateFileReadRequest(systemFilePaths[5], false, Roles.Admin);
 
             Console.ReadLine();
         }
