@@ -9,37 +9,20 @@ namespace FileReaderApp
     {
         static void Main(string[] args)
         {
-            var systemFilePaths = new List<string>
-            {
-                @"Files\Text\TextFile.txt",
-                @"Files\Text\EncryptedTextFile.txt",
-                @"Files\XML\XMLFile.xml",
-                @"Files\XML\AdminXMLFile.xml",
-                @"Files\XML\EncryptedXMLFile.xml",
-                @"Files\Text\AdminTextFile.txt",
-            };
+            ExecuteTextFileReadRequests();
 
-            CreateFileReadRequest(systemFilePaths[0], false, Roles.User);
+            ExecuteXMLFileReadRequests();
 
-            CreateFileReadRequest(systemFilePaths[1], false, Roles.User);
-
-            CreateFileReadRequest(systemFilePaths[1], true, Roles.User);
-
-            CreateFileReadRequest(systemFilePaths[2], false, Roles.User);
-
-            CreateFileReadRequest(systemFilePaths[3], false, Roles.User);            
-
-            CreateFileReadRequest(systemFilePaths[3], false, Roles.Admin);
-
-            CreateFileReadRequest(systemFilePaths[4], false, Roles.User);
-
-            CreateFileReadRequest(systemFilePaths[4], true, Roles.User);
-
-            CreateFileReadRequest(systemFilePaths[5], false, Roles.User);
-
-            CreateFileReadRequest(systemFilePaths[5], false, Roles.Admin);
+            ExecuteJSONFileReadRequests();
 
             Console.ReadLine();
+        }
+
+        private static void ReadFile(FileReadRequest request)
+        {
+            var fileReader = new FileReaderFactory().CreateReader(request.FilePath);
+            var content = fileReader.Read(request);
+            Console.WriteLine(content);
         }
 
         private static void CreateFileReadRequest(string filePath, bool decrypt, Roles role)
@@ -50,11 +33,55 @@ namespace FileReaderApp
             Console.WriteLine();
         }
 
-        private static void ReadFile(FileReadRequest request)
+        private static void ExecuteTextFileReadRequests()
         {
-            var fileReader = new FileReaderFactory().CreateReader(request.FilePath);
-            var content = fileReader.Read(request);
-            Console.WriteLine(content);
+            var textFilePaths = new List<string>
+            {
+                @"Files\Text\TextFile.txt",
+                @"Files\Text\EncryptedTextFile.txt",
+                @"Files\Text\AdminTextFile.txt",
+            };
+
+            Console.WriteLine("Executing TEXT file reads");
+            Console.WriteLine("-------------------------");
+
+            CreateFileReadRequest(textFilePaths[0], false, Roles.User);
+            CreateFileReadRequest(textFilePaths[1], false, Roles.User);
+            CreateFileReadRequest(textFilePaths[1], true, Roles.User);
+            CreateFileReadRequest(textFilePaths[2], false, Roles.User);
+            CreateFileReadRequest(textFilePaths[2], false, Roles.Admin);
+        }
+
+        private static void ExecuteXMLFileReadRequests()
+        {
+            var xmlFilePaths = new List<string>
+            {
+                @"Files\XML\XMLFile.xml",
+                @"Files\XML\EncryptedXMLFile.xml",
+                @"Files\XML\AdminXMLFile.xml",
+            };
+
+            Console.WriteLine("Executing XML file reads");
+            Console.WriteLine("-------------------------");
+
+            CreateFileReadRequest(xmlFilePaths[0], false, Roles.User);
+            CreateFileReadRequest(xmlFilePaths[1], false, Roles.User);
+            CreateFileReadRequest(xmlFilePaths[1], true, Roles.User);
+            CreateFileReadRequest(xmlFilePaths[2], false, Roles.User);
+            CreateFileReadRequest(xmlFilePaths[2], false, Roles.Admin);
+        }
+
+        private static void ExecuteJSONFileReadRequests()
+        {
+            var jsonFilePaths = new List<string>
+            {
+                @"Files\JSON\JsonFile.json",
+            };
+
+            Console.WriteLine("Executing JSON file reads");
+            Console.WriteLine("-------------------------");
+
+            CreateFileReadRequest(jsonFilePaths[0], false, Roles.User);
         }
     }
 }

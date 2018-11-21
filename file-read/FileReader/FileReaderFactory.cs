@@ -25,7 +25,10 @@ namespace FileReader
                 new XMLFileReader(
                     new XMLReader(),
                     new XMLReverseDecrypter(),
-                    new SecurityContext())
+                    new SecurityContext()),
+
+                new JsonFileReader(
+                    new JsonReader())
             };
         }
 
