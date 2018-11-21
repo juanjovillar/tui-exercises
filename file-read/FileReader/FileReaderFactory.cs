@@ -22,7 +22,8 @@ namespace FileReader
                     new ReverserDecrypter()),
 
                 new XMLFileReader(
-                    new XMLReader(), 
+                    new XMLReader(),
+                    new XMLReverseDecrypter(),
                     new SecurityContext())
             };
         }

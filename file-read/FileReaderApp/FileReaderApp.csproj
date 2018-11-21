@@ -19,6 +19,9 @@
     <None Update="Files\XML\AdminXMLFile.xml">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
+    <None Update="Files\XML\EncryptedXMLFile.xml">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
     <None Update="Files\XML\XMLFile.xml">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
