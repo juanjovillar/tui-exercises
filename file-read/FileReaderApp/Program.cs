@@ -76,12 +76,15 @@ namespace FileReaderApp
             var jsonFilePaths = new List<string>
             {
                 @"Files\JSON\JsonFile.json",
+                @"Files\JSON\EncryptedJsonFile.json",
             };
 
             Console.WriteLine("Executing JSON file reads");
             Console.WriteLine("-------------------------");
 
             CreateFileReadRequest(jsonFilePaths[0], false, Roles.User);
+            CreateFileReadRequest(jsonFilePaths[1], false, Roles.User);
+            CreateFileReadRequest(jsonFilePaths[1], true, Roles.User);
         }
     }
 }

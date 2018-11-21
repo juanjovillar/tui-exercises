@@ -28,7 +28,8 @@ namespace FileReader
                     new SecurityContext()),
 
                 new JsonFileReader(
-                    new JsonReader())
+                    new JsonReader(),
+                    new ReverserDecrypter())
             };
         }
 

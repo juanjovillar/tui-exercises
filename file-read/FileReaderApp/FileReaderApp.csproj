@@ -10,6 +10,9 @@
   </ItemGroup>
 
   <ItemGroup>
+    <None Update="Files\JSON\EncryptedJsonFile.json">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
     <None Update="Files\JSON\JsonFile.json">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
