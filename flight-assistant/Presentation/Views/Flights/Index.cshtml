@@ -1,0 +1,33 @@
+﻿@using Application.Flights.Queries.GetFlightsList
+@model IEnumerable<FlightListItemReadModel>
+
+@{
+    ViewBag.Title = "FLight List";
+    Layout = "_Layout";
+}
+
+<h2>Flights</h2>
+<table class="table table-striped">
+    <thead>
+    <tr>
+        <th>ID</th>
+        <th>Source Airport</th>
+        <th>Destination Airport</th>
+        <th>Aircraft Type</th>
+    </tr>
+    </thead>
+    <tbody>
+    @foreach (var flight in Model)
+    {
+        <tr>
+            <td><a href="flights/details/@flight.Id">@flight.Id</a></td>
+            <td>@flight.DepartureAirportName</td>
+            <td>@flight.DestinationAirportName</td>
+            <td>@flight.AircraftModel</td>
+        </tr>
+    }
+    </tbody>
+</table>
+<div class="pull-right">
+    <a class="btn btn-primary" href="flights/create">Create Flight</a>
+</div>
