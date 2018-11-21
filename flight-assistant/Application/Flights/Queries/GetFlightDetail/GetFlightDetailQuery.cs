@@ -21,8 +21,8 @@ namespace Application.Flights.Queries.GetFlightDetail
                 AircraftId = flight.AircraftId,
                 DepartureAirportId = flight.DepartureAirportId,
                 DestinationAirportId = flight.DestinationAirportId,
-                DepartureAirportName = flight.DepartureAirport.IATA,
-                DestinationAirportName = flight.DestinationAirport.IATA,
+                DepartureAirportName = $"{flight.DepartureAirport.IATA} - {flight.DepartureAirport.City}",
+                DestinationAirportName = $"{flight.DestinationAirport.IATA} - {flight.DestinationAirport.City}",
                 AircraftModel = flight.Aircraft.ModelName,
                 Distance = flight.Distance,
                 RequiredFuel = flight.RequiredFuel

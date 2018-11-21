@@ -1,4 +1,5 @@
-﻿using Domain.Aircrafts;
+﻿using System;
+using Domain.Aircrafts;
 using Domain.Airports;
 using Domain.Common;
 using GeoCoordinatePortable;
@@ -41,10 +42,11 @@ namespace Domain.Flights
             {
                 var depGeo = new GeoCoordinate(DepartureAirport.Latitude, DepartureAirport.Longitude);
                 var destGeo = new GeoCoordinate(DestinationAirport.Latitude, DestinationAirport.Longitude);
-                return depGeo.GetDistanceTo(destGeo);
+                var distance = depGeo.GetDistanceTo(destGeo) / 1000;
+                return Math.Round(distance, 2) ;
             }
         }
 
-        public double RequiredFuel => Aircraft.ConsumptionOnTakeOff + Aircraft.ConsumptionPerKm * Distance / 1000;
+        public double RequiredFuel => Math.Round(Aircraft.ConsumptionOnTakeOff + Aircraft.ConsumptionPerKm * Distance, 2);
     }
 }
