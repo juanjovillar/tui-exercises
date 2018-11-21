@@ -1,7 +1,8 @@
-﻿@model IEnumerable<Presentation.Flights.Models.FlightViewModel>
+﻿@using Application.Flights.Queries.GetFlightsList
+@model IEnumerable<FlightListItemReadModel>
 
 @{
-    ViewBag.Title = "title";
+    ViewBag.Title = "FLight List";
     Layout = "_Layout";
 }
 
@@ -13,16 +14,16 @@
         <th>Source Airport</th>
         <th>Destination Airport</th>
         <th>Aircraft Type</th>
-        <th>Flight Alias</th>
     </tr>
     </thead>
     <tbody>
     @foreach (var flight in Model)
     {
         <tr>
-            <td><a href="flights/@flight.Id">@flight.Id</a></td>
-            <td>@flight.SourceAirport</td>
-            <td>@flight.DestinationAirport</td>
+            <td><a href="flights/details/@flight.Id">@flight.Id</a></td>
+            <td>@flight.DepartureAirportName</td>
+            <td>@flight.DestinationAirportName</td>
+            <td>@flight.AircraftModel</td>
         </tr>
     }
     </tbody>

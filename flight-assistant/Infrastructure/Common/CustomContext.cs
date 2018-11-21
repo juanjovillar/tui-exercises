@@ -28,6 +28,12 @@ namespace Infrastructure.Common
         private void configureRelations(ModelBuilder modelBuilder)
         {
             modelBuilder.Entity<Flight>()
+                .Property(x => x.Id).ValueGeneratedOnAdd();
+
+            modelBuilder.Entity<Flight>()
+                .HasKey(x => x.Id);
+
+            modelBuilder.Entity<Flight>()
                 .HasOne(f => f.DepartureAirport)
                 .WithMany(a => a.DepartingFlights)
                 .HasForeignKey(f => f.DepartureAirportId);
@@ -35,7 +41,7 @@ namespace Infrastructure.Common
             modelBuilder.Entity<Flight>()
                 .HasOne(f => f.DestinationAirport)
                 .WithMany(a => a.IncomingFlights)
-                .HasForeignKey(f => f.DepartureAirportId);
+                .HasForeignKey(f => f.DestinationAirportId);
 
             modelBuilder.Entity<Flight>()
                 .HasOne(f => f.Aircraft)
@@ -106,6 +112,32 @@ namespace Infrastructure.Common
             modelBuilder.Entity<Aircraft>().HasData(
                 airBus320,
                 boeing757);
+
+
+            // REF ->https://wildermuth.com/2018/08/12/Seeding-Related-Entities-in-EF-Core-2-1-s-HasData()
+            modelBuilder.Entity<Flight>().HasData(
+                new
+                {
+                    Id = 100,
+                    DepartureAirportId = 1,
+                    DestinationAirportId = 2,
+                    AircraftId = 1
+                },
+                new
+                {
+                    Id = 101,
+                    DepartureAirportId = 3,
+                    DestinationAirportId = 4,
+                    AircraftId = 2
+                },
+                new
+                {
+                    Id = 102,
+                    DepartureAirportId = 1,
+                    DestinationAirportId = 3,
+                    AircraftId = 1
+                }
+            );
         }
     }
 }

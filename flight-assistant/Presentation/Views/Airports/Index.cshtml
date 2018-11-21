@@ -1,0 +1,28 @@
+﻿@using Application.Airports.Queries.GetAirportsList
+@model IEnumerable<AirportListItemReadModel>
+
+@{
+    ViewBag.Title = "Airports List";
+    Layout = "_Layout";
+}
+
+<h2>Flights</h2>
+<table class="table table-striped">
+    <thead>
+        <tr>
+            <th>ID</th>
+            <th>IATA</th>
+            <th>City</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var airport in Model)
+        {
+        <tr>
+            <td>@airport.Id</td>
+            <td>@airport.IATA</td>
+            <td>@airport.City</td>
+        </tr>
+        }
+    </tbody>
+</table>

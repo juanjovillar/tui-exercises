@@ -1,0 +1,26 @@
+﻿@using Application.Aircrafts.Queries.GetAircraftList
+@model IEnumerable<AircraftListItemReadModel>
+
+@{
+    ViewBag.Title = "Aircraft List";
+    Layout = "_Layout";
+}
+
+<h2>Flights</h2>
+<table class="table table-striped">
+    <thead>
+        <tr>
+            <th>ID</th>
+            <th>Model</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var aircraft in Model)
+        {
+            <tr>
+                <td>@aircraft.Id</td>
+                <td>@aircraft.ModelName</td>
+            </tr>
+        }
+    </tbody>
+</table>

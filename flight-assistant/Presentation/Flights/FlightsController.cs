@@ -1,100 +1,90 @@
-﻿using Microsoft.AspNetCore.Http;
+﻿using Application.Flights.Commands.CreateFlight;
+using Application.Flights.Commands.UpdateFlight;
+using Application.Flights.Queries.GetFlightDetail;
+using Application.Flights.Queries.GetFlightsList;
 using Microsoft.AspNetCore.Mvc;
 using Presentation.Flights.Models;
-using System.Collections.Generic;
+using Presentation.Flights.Models.Factory;
+using System;
 
 namespace Presentation.Flights
 {
     public class FlightsController : Controller
     {
-        // GET: Flights
+        private readonly IGetFlightListQuery _flightListQuery;
+        private readonly IGetFlightDetailQuery _flightDetailQuery;
+        private readonly IUpsertFlightViewModelFactory _upsertFlightViewModelFactory;
+        private readonly ICreateFlightCommand _createFlightCommand;
+        private readonly IUpdateFlightCommand _updateFlightCommand;
+
+        public FlightsController(
+            IGetFlightListQuery flightListQuery,
+            IGetFlightDetailQuery flightDetailQuery,
+            IUpsertFlightViewModelFactory upsertFlightViewModelFactory,
+            ICreateFlightCommand createFlightCommand,
+            IUpdateFlightCommand updateFlightCommand)
+        {
+            _flightListQuery = flightListQuery;
+            _flightDetailQuery = flightDetailQuery;
+            _upsertFlightViewModelFactory = upsertFlightViewModelFactory;
+            _createFlightCommand = createFlightCommand;
+            _updateFlightCommand = updateFlightCommand;
+        }
+
+        [HttpGet]
         public ActionResult Index()
         {
-            var flights = new List<FlightViewModel>
-            {
-                new FlightViewModel
-                {
-                    Id = 1,
-                    SourceAirport = "SARP",
-                    DestinationAirport = "DARP"
-                },
-                new FlightViewModel
-                {
-                    Id = 2,
-                    SourceAirport = "SARP",
-                    DestinationAirport = "DARP"
-                },
-            };
-
+            var flights = _flightListQuery.Execute();
             return View(flights);
         }
 
-        // GET: Flights/Details/5
+        [HttpGet]
         public ActionResult Details(int id)
         {
-            return View();
+            var flight = _flightDetailQuery.Execute(id);
+            return View(flight);
         }
 
-        // GET: Flights/Create
+        [HttpGet]
         public ActionResult Create()
         {
-            return View();
+            var viewModel = _upsertFlightViewModelFactory.Create();
+            return View(viewModel);
         }
 
-        // POST: Flights/Create
         [HttpPost]
-        [ValidateAntiForgeryToken]
-        public ActionResult Create(IFormCollection collection)
+        public ActionResult Create(UpsertFlightViewModel viewModel)
         {
             try
             {
-                // TODO: Add insert logic here
-
+                _createFlightCommand.Execute(viewModel.Flight);
                 return RedirectToAction(nameof(Index));
             }
-            catch
+            catch (Exception ex)
             {
                 return View();
             }
         }
 
-        // GET: Flights/Edit/5
+        [HttpGet]
         public ActionResult Edit(int id)
         {
-            return View();
+            var viewModel = _upsertFlightViewModelFactory.Create(id);
+            return View(viewModel);
         }
 
-        // POST: Flights/Edit/5
         [HttpPost]
-        [ValidateAntiForgeryToken]
-        public ActionResult Edit(int id, IFormCollection collection)
+        public ActionResult Edit(int id, UpsertFlightViewModel viewModel)
         {
             try
             {
-                // TODO: Add update logic here
+                var updateModel = new UpdateFlightModel
+                {
+                    FlightId = id,
+                    Flight = viewModel.Flight
+                };
 
-                return RedirectToAction(nameof(Index));
-            }
-            catch
-            {
-                return View();
-            }
-        }
-
-        // GET: Flights/Delete/5
-        public ActionResult Delete(int id)
-        {
-            return View();
-        }
-
-        // POST: Flights/Delete/5
-        [HttpPost]
-        [ValidateAntiForgeryToken]
-        public ActionResult Delete(int id, IFormCollection collection)
-        {
-            try
-            {
-                // TODO: Add delete logic here
+                _updateFlightCommand.Execute(updateModel);
 
                 return RedirectToAction(nameof(Index));
             }

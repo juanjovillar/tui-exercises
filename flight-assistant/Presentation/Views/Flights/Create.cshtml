@@ -1,12 +1,8 @@
-﻿@model Presentation.Flights.Models.FlightViewModel
+﻿@model Presentation.Flights.Models.UpsertFlightViewModel
 
 @{
-    ViewBag.Title = "title";
+    ViewBag.Title = "Create Flight";
     Layout = "_Layout";
-}
-
-@{
-    ViewBag.Title = "Create Sale";
 }
 
 <h2>Create Flight</h2>
@@ -16,20 +12,20 @@
 <form class="form-horizontal">
     <div class="form-group">
         <label class="control-label">Source Airport</label>
-        @*@Html.DropDownListFor(p => p.Airtports.AirportId, Model.Airports, new { @class = "form-control" })*@
+        @Html.DropDownListFor(p => p.Flight.DepartureAirportId, Model.Airports, new { @class = "form-control" })
     </div>
     <div class="form-group">
         <label class="control-label">Destination Airport</label>
-        @*@Html.DropDownListFor(p => p.Airtports.AirportId, Model.Airports, new { @class = "form-control" })*@
+        @Html.DropDownListFor(p => p.Flight.DestinationAirportId, Model.Airports, new { @class = "form-control" })
     </div>
     <div class="form-group">
         <label class="control-label">Aircraft</label>
-        @*@Html.DropDownListFor(p => p.Airtports.AircraftId, Model.Aircrafts, new { @class = "form-control" })*@
+        @Html.DropDownListFor(p => p.Flight.AircraftId, Model.Aircrafts, new { @class = "form-control" })
     </div>
-    <div class="form-group">
+    @*<div class="form-group">
         <label class="control-label">Flight Name</label>
-        @*@Html.TextBoxFor(p => p.Flight.IATA, new { @class = "form-control" })*@
-    </div>
+        @Html.TextBoxFor(p => p.Flight.IATA, new { @class = "form-control" })
+    </div>*@
     <button type="submit" class="btn btn-primary">Create</button>
 </form>
 }

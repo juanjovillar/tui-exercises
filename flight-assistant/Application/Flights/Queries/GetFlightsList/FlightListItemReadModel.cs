@@ -1,7 +1,4 @@
-﻿using Domain.Aircrafts;
-using Domain.Airports;
-
-namespace Application.Flights.Queries.GetFlightsList
+﻿namespace Application.Flights.Queries.GetFlightsList
 {
     public class FlightListItemReadModel
     {

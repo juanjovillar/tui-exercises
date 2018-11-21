@@ -4,6 +4,12 @@
     {
         public int Id { get; set; }
 
+        public int DepartureAirportId { get; set; }
+
+        public int DestinationAirportId { get; set; }
+
+        public int AircraftId { get; set; }
+
         public string DepartureAirportName { get; set; }
 
         public string DestinationAirportName { get; set; }
