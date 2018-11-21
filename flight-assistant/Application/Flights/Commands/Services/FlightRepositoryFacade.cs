@@ -3,7 +3,7 @@ using Domain.Aircrafts;
 using Domain.Airports;
 using Domain.Flights;
 
-namespace Application.Flights.Commands.CreateFlight.Repository
+namespace Application.Flights.Commands.Services
 {
     public class FlightRepositoryFacade : IFlightRepositoryFacade
     {
@@ -29,6 +29,11 @@ namespace Application.Flights.Commands.CreateFlight.Repository
         public Aircraft GetAircraft(int aircraftId)
         {
             return _aircraftRepository.Get(aircraftId);
+        }
+
+        public Flight GetFlight(int flightId)
+        {
+            return _flightRepository.Get(flightId);
         }
 
         public void AddFlight(Flight flight)

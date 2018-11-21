@@ -1,33 +1,29 @@
 ﻿using Application.Flights.Commands.Services;
 using Application.Interfaces;
-using Domain.Flights;
 
-namespace Application.Flights.Commands.CreateFlight
+namespace Application.Flights.Commands.UpdateFlight
 {
-    public class CreateFlightCommand : ICreateFlightCommand
+    public class UpdateFlightCommand : IUpdateFlightCommand
     {
         private readonly IFlightRepositoryFacade _repositories;
         private readonly IUnitOfWork _unitOfWork;
 
-        public CreateFlightCommand(
-            IFlightRepositoryFacade repositories,
-            IUnitOfWork unitOfWork)
+        public UpdateFlightCommand(IFlightRepositoryFacade repositories, IUnitOfWork unitOfWork)
         {
             _repositories = repositories;
             _unitOfWork = unitOfWork;
         }
 
-        public void Execute(CreateFlightModel model)
+        public void Execute(UpdateFlightModel model)
         {
             var departureAirpot = _repositories.GetAirport(model.DepartureAirportId);
-
             var destinationAirpot = _repositories.GetAirport(model.DestinationAirportId);
-
             var aircraft = _repositories.GetAircraft(model.AircraftId);
+            var flight = _repositories.GetFlight(model.FlightId);
 
-            var flight = new Flight(departureAirpot, destinationAirpot, aircraft);
-
-            _repositories.AddFlight(flight);
+            flight.DepartureAirport = departureAirpot;
+            flight.DestinationAirport = destinationAirpot;
+            flight.Aircraft = aircraft;
 
             _unitOfWork.Save();
         }

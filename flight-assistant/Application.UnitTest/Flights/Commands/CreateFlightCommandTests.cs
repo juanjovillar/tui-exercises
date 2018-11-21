@@ -1,5 +1,5 @@
 ﻿using Application.Flights.Commands.CreateFlight;
-using Application.Flights.Commands.CreateFlight.Repository;
+using Application.Flights.Commands.Services;
 using Application.Interfaces;
 using Domain.Aircrafts;
 using Domain.Airports;

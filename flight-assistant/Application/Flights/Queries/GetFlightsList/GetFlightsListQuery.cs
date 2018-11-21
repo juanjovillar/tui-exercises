@@ -15,7 +15,9 @@ namespace Application.Flights.Queries.GetFlightsList
 
         public List<FlightListItemReadModel> Execute()
         {
-            var flights = _repository.GetAll()
+            var flights = _repository
+                .GetAll()
+                .ToList()
                 .Select(f => new FlightListItemReadModel
                 {
                     Id = f.Id,
