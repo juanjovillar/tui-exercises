@@ -1,8 +1,39 @@
-﻿@model Presentation.Flights.Models.FlightViewModel
+﻿@using Application.Flights.Queries.GetFlightDetail
+@model FlightDetailReadModel
 
 @{
-    ViewBag.Title = "title";
+    ViewBag.Title = "Flight Report";
     Layout = "_Layout";
 }
 
 <h2>Flight Detail</h2>
+<table>
+    <tr>
+        <th>ID</th>
+        <td>@Model.Id</td>
+    </tr>
+    <tr>
+        <th>Departure Airport</th>
+        <td>@Model.DepartureAirportName</td>
+    </tr>
+    <tr>
+        <th>Destination Airport</th>
+        <td>@Model.DestinationAirportName</td>
+    </tr>
+    <tr>
+        <th>Aircraft Model</th>
+        <td>@Model.AircraftModel</td>
+    </tr>
+    <tr>
+        <th>Distance</th>
+        <td>@Model.Distance</td>
+    </tr>
+    <tr>
+        <th>Requred Fuel</th>
+        <td>@Model.RequiredFuel</td>
+    </tr>
+</table>
+
+<div class="pull-right">
+    <a class="btn btn-primary" href="/flights/edit/@Model.Id">Edit Flight</a>
+</div>

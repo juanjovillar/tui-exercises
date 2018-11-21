@@ -16,9 +16,9 @@ namespace Application.Flights.Commands.UpdateFlight
 
         public void Execute(UpdateFlightModel model)
         {
-            var departureAirpot = _repositories.GetAirport(model.DepartureAirportId);
-            var destinationAirpot = _repositories.GetAirport(model.DestinationAirportId);
-            var aircraft = _repositories.GetAircraft(model.AircraftId);
+            var departureAirpot = _repositories.GetAirport(model.Flight.DepartureAirportId);
+            var destinationAirpot = _repositories.GetAirport(model.Flight.DestinationAirportId);
+            var aircraft = _repositories.GetAircraft(model.Flight.AircraftId);
             var flight = _repositories.GetFlight(model.FlightId);
 
             flight.DepartureAirport = departureAirpot;
