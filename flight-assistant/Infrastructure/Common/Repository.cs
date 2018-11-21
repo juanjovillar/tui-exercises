@@ -35,5 +35,6 @@ namespace Infrastructure.Common
         {
             _context.Set<T>().Remove(entity);
         }
+        
     }
 }

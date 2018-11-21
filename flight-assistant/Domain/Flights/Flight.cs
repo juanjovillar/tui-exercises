@@ -16,7 +16,7 @@ namespace Domain.Flights
             DestinationAirport = destinationAirport;
             DestinationAirportId = destinationAirport.Id;
             DepartureAirport = departureAirport;
-            DestinationAirportId = departureAirport.Id;
+            DepartureAirportId = departureAirport.Id;
             Aircraft = aircraft;
             AircraftId = aircraft.Id;
         }

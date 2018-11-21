@@ -61,6 +61,8 @@ namespace Infrastructure.UnitTest.Flights
             // When
             using (var context = new CustomContext(options))
             {
+                context.Database.EnsureCreated();
+
                 var uow = new UnitOfWork(context);
                 var repository = new FlightsRepository(context);
                 var airportRepository = new AirportsRepository(context);
