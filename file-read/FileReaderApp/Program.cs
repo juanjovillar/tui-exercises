@@ -1,6 +1,5 @@
 ﻿using System;
-using System.IO;
-using System.Reflection;
+using System.Collections.Generic;
 
 namespace FileReaderApp
 {
@@ -8,23 +7,22 @@ namespace FileReaderApp
     {
         static void Main(string[] args)
         {
+            var systemFilePaths = new List<string>
+            {
+                @"Files\Text\TextFile.txt",
+                @"Files\XML\XMLFile.xml"
+            };
+
             var fileReader = new FileReader.FileReader();
-            var filePath = GetDefaultFilePath();
 
-            var content = fileReader.Read(filePath);
-
-            Console.Write(content);
+            systemFilePaths.ForEach(f =>
+            {
+                var content = fileReader.Read(f);
+                Console.WriteLine(content);
+                Console.WriteLine();
+            });
 
             Console.ReadLine();
-        }
-
-        private static string GetDefaultFilePath()
-        {
-            var baseDir = Path.GetDirectoryName(Assembly.GetExecutingAssembly().Location);
-            var relativeFilePath = @"Files\Text\TextFile.txt";
-            var filePath = Path.Combine(baseDir, relativeFilePath);
-
-            return filePath;
         }
     }
 }
