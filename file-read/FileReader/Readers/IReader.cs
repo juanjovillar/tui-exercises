@@ -2,7 +2,7 @@
 {
     public interface IReader
     {
-        bool CanReadFileType(string filetype);
+        bool CanManageType(string filetype);
 
         string Read(string filePath);
     }

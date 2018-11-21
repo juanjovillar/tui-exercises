@@ -10,17 +10,20 @@ namespace FileReaderApp
             var systemFilePaths = new List<string>
             {
                 @"Files\Text\TextFile.txt",
-                @"Files\XML\XMLFile.xml"
+                @"Files\Text\EncryptedTextFile.txt",
+                @"Files\XML\XMLFile.xml",
             };
 
             var fileReader = new FileReader.FileReader();
 
-            systemFilePaths.ForEach(f =>
-            {
-                var content = fileReader.Read(f);
-                Console.WriteLine(content);
-                Console.WriteLine();
-            });
+            Console.WriteLine(fileReader.Read(systemFilePaths[0], false));
+            Console.WriteLine();
+
+            Console.WriteLine(fileReader.Read(systemFilePaths[1], true));
+            Console.WriteLine();
+
+            Console.WriteLine(fileReader.Read(systemFilePaths[2], false));
+            Console.WriteLine();
 
             Console.ReadLine();
         }

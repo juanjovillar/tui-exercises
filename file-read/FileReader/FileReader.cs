@@ -1,33 +1,40 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using FileReader.Readers;
 using System.IO;
-using System.Linq;
 using System.Reflection;
-using FileReader.Readers;
-using TextReader = FileReader.Readers.TextReader;
+using FileReader.Cryptography;
+using FileReader.Cryptography.Algorithms;
+using FileReader.Cryptography.Decrypters;
 
 namespace FileReader
 {
     public class FileReader
     {
-        private IEnumerable<IReader> Readers => new List<IReader>
-        {
-            new TextReader(),
-            new XMLReader(),
-        };
+        private readonly ReadersFactory _readersFactory;
+        private readonly DecryptersFactory _decryptersFactory;
+        private readonly IAlgorithm _decryptionAlgorithm;
 
-        public string Read(string filePath)
+        public FileReader()
+        {
+            _readersFactory = new ReadersFactory();
+            _decryptersFactory = new DecryptersFactory();
+            _decryptionAlgorithm = new ReverseDecryptor();
+        }
+
+        public string Read(string filePath, bool shouldDecrypt)
         {
             var file = new FileInfo(filePath);
             var absoluteFilePath = GetAbsolutePath(file);
 
-            var reader = Readers.FirstOrDefault(x => x.CanReadFileType(file.Extension));
-            if (reader == null)
+            var reader = _readersFactory.GetReader(file.Extension);
+            var content = reader.Read(absoluteFilePath);
+
+            if (shouldDecrypt)
             {
-                throw new ArgumentException($"Cannot read files of type {file.Extension}");
+                var decrypter = _decryptersFactory.GetDecrypter(file.Extension);
+                content = decrypter.Decrypt(_decryptionAlgorithm, content);
             }
 
-            return reader.Read(absoluteFilePath);
+            return content;
         }
 
         private string GetAbsolutePath(FileInfo fileInfo)
@@ -39,3 +46,4 @@ namespace FileReader
         }
     }
 }
+

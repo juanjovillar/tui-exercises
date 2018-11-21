@@ -4,7 +4,7 @@ namespace FileReader.Readers
 {
     public class XMLReader : IReader
     {
-        public bool CanReadFileType(string filetype)
+        public bool CanManageType(string filetype)
         {
             return filetype == ".xml";
         }
