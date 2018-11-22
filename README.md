@@ -1,4 +1,4 @@
-# TUI assessmnent
+# TUI assessment
 
 ## 01 Flight Assistant
 In the implementation I have tried to cover different aspects of:
