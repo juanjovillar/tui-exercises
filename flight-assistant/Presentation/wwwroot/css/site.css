@@ -23,6 +23,10 @@ body {
     width: 100%;
 }
 
+.navbar-inverse {
+    color: #337ab7;
+}
+
 /* QR code generator */
 #qrCode {
     margin: 15px;
